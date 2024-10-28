@@ -1,0 +1,12 @@
+#Dev environment specific config file. Ideally there should be a separate config repo and as a best practice,
+#config should not be bundled with code.
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:customerServiceDB
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true

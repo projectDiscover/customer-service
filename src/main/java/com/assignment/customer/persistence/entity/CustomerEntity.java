@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 
 import java.util.UUID;
@@ -34,6 +36,7 @@ public class CustomerEntity {
 
     // Since this field may contains composite value, it is more efficient to store this data in DB in a JSONB datatype
     // column. Strong it as String for simplicity, but need to parse it everytime for processing which has performance cost.
+    //@JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "Phone_Number", nullable = false)
     private String phoneNumber;
 

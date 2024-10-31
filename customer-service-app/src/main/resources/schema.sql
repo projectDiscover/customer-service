@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS CUSTOMER (
     UPDATED_DATE TIMESTAMP
 );
 
-COMMENT ON COLUMN CUSTOMER.ID IS E'Ideally it should be GUID. But kept it as Integer for simplicity.';
+COMMENT ON COLUMN CUSTOMER.ID IS 'Ideally it should be GUID. But kept it as Integer for simplicity.';

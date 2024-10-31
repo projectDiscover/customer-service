@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: customer-service
+  name: customer-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: customer-service
+    spec:
+      containers:
+      - image: payments/customer-service-app
+        imagePullPolicy: Never
+        name: customer-service-app
+        resources: {}
+status: {}

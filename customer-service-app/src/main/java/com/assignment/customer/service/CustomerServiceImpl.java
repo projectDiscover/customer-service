@@ -36,7 +36,8 @@ public class CustomerServiceImpl implements CustomerService{
     public boolean updateCustomer(CustomerUpdateRequestBean customerUpdateRequestBean) {
         Optional<CustomerEntity> customerEntityOp = customerRepository.findById(Long.parseLong(customerUpdateRequestBean.getCustomerId()));
         if(customerEntityOp.isPresent()){
-            CustomerEntity customerEntity = customerRepository.saveAndFlush(getCustomerUpdEntity(customerUpdateRequestBean));
+            getCustomerUpdEntity(customerEntityOp.get(), customerUpdateRequestBean);
+            CustomerEntity customerEntity = customerRepository.saveAndFlush(customerEntityOp.get());
             log.info("Customer Data updated successfully: {}", customerEntity);
             return true;
         }
@@ -80,15 +81,12 @@ public class CustomerServiceImpl implements CustomerService{
     /**
      * This method is performing Bean conversion. It is a perfect use case of MapStruct library
      * @param customerUpdateRequestBean Customer Data
-     * @return Customer Entity
      */
-    private CustomerEntity getCustomerUpdEntity(CustomerUpdateRequestBean customerUpdateRequestBean) {
-        return CustomerEntity.builder()
-                .firstName(customerUpdateRequestBean.getFirstName())
-                .middleName(customerUpdateRequestBean.getMiddleName())
-                .lastName(customerUpdateRequestBean.getLastName())
-                .email(customerUpdateRequestBean.getEmail())
-                .phoneNumber(customerUpdateRequestBean.getPhoneNumber())
-                .build();
+    private void getCustomerUpdEntity(CustomerEntity customerEntity, CustomerUpdateRequestBean customerUpdateRequestBean) {
+        customerEntity.setFirstName(customerUpdateRequestBean.getFirstName());
+        customerEntity.setMiddleName(customerUpdateRequestBean.getMiddleName());
+        customerEntity.setLastName(customerUpdateRequestBean.getLastName());
+        customerEntity.setEmail(customerUpdateRequestBean.getEmail());
+        customerEntity.setPhoneNumber(customerUpdateRequestBean.getPhoneNumber());
     }
 }
